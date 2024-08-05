@@ -1,5 +1,6 @@
 import { fetchEvents } from "./discoveryapi";
 import { countries } from "../data/countries"; 
+// import { showEventDetails } from "./modal";
 
 import Notiflix from 'notiflix';
 
@@ -33,10 +34,17 @@ const populateEventGallery = (events) => {
             <p class="item-location">
                ${event._embedded.venues[0].name}
             </p>
+            <button class="event-details-btn" data-id="${event.id}">View Details</button>
         </div>
     </div>`)
     .join("");
-  itemGallery.innerHTML = markup;
+    itemGallery.innerHTML = markup;
+    
+//     document.querySelectorAll('.event-details-btn').forEach(button => {
+//       button.addEventListener('click', (e) => {
+//           showEventDetails(button.dataset.id);
+//       });
+//   });
 };
 
 

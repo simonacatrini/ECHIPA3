@@ -1,0 +1,91 @@
+:root {
+    --font-family: 'Montserrat', sans-serif;
+    --deep-fuchsia: #dc56c5;
+    --magnolia: #fff2fd;
+    --electric-ultramarine: #4c00fe;
+    --smoky-black: #0e0e0e;
+    --white: #ffffff;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: var(--magnolia);
+    margin-top: 201px;
+    margin-left: 20%;
+    /* padding: 20px; */
+    border: 1px solid #888;
+    width: 60%;
+
+    /* width: 930px; */
+    height: 80%;
+    color: black;
+    border-radius: 300px 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: var(--smoky-black);
+}
+
+.modal-content h4 {
+    color: var(--deep-fuchsia);
+}
+
+.buy-tickets {
+    background-color: var(--electric-ultramarine);
+    color: var(--white);
+    width: 145px;
+    height: 40px;
+}
+
+.modal-content ul {
+    list-style-type: none;
+    display: flex;
+    padding-left: 3%;
+    align-items: center;
+    gap: 60px;
+    text-align: left;
+    padding-top: 141px;
+}
+
+.main-image {
+    width: 360px;
+    height: auto;
+}
+
+.event-logo {
+    position: absolute;
+    border-radius: 50%;
+    width: 132px;
+    height: 132px;
+    top: 62px;
+    left: 40%;
+}
+
+.close-button {
+    position: absolute;
+    color: #aaa;
+    float: right;
+    top: 30px;
+    right: 30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
