@@ -13,12 +13,12 @@ const fetchEvents = async (query = "", country = undefined, page = 1) => {
         apikey: API_KEY,
         keyword: query,
         page,
-        per_page: `${HITSPERPAGE}`,
+        size: `${HITSPERPAGE}`,
         countryCode: country,
       },
     });
-    // console.log(typeof response);
-    return response.data;
+    return {data: response.data,
+          totalCount: response.data.page.totalElements}
   } catch (error) {
     console.log('Error:', error);
     Notiflix.Notify.failure(
@@ -27,4 +27,4 @@ const fetchEvents = async (query = "", country = undefined, page = 1) => {
   }
 };
 
-export {fetchEvents};
+export {fetchEvents, HITSPERPAGE};

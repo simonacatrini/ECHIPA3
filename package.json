@@ -1,21 +1,21 @@
 {
-  "name": "ECHIPA3",
+  "name": "eventbooster-kata",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://simonacatrini.github.io/ECHIPA3",
+  "homepage": "https://KatalinLengyel.github.io/eventbooster-kata",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /ECHIPA3/"
+    "build": "parcel build src/*.html --public-url /eventbooster-kata/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simonacatrini/ECHIPA3.git"
+    "url": "git+https://github.com/KatalinLengyel/eventbooster-kata.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/simonacatrini/ECHIPA3/issues"
+    "url": "https://github.com/KatalinLengyel/eventbooster-kata/issues"
   },
   "dependencies": {
     "axios": "^1.7.3",
@@ -25,7 +25,7 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
     "buffer": "^6.0.3",
-    "parcel": "^2.12.0",
+    "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^1.7.4",
     "process": "^0.11.10"
