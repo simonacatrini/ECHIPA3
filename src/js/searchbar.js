@@ -1,27 +1,32 @@
-import { fetchEvents } from "./discoveryapi";
-import { countries } from "../data/countries"; 
+import { fetchEvents } from './discoveryapi';
+import { countries } from '../data/countries';
+import { generatePagination } from './pagination';
 
 import Notiflix from 'notiflix';
+import pin from "../images/vector.svg"
 
-
-
-const form = document.querySelector(".search-form")
-const itemGallery = document.querySelector(".item-gallery");
-const dropdownList = document.querySelector(".dropdown-list");
+// const form = document.querySelector('.search-form');
+const itemGallery = document.querySelector('.item-gallery');
+const dropdownList = document.querySelector('.dropdown-list');
+const pagesList = document.querySelector(".pages");
 
 const populateCountriesDropdown = () => {
-    const markup = countries.map(country => {
-        return `<option value="${country.code}">${country.name}</option>`
+  const markup = countries
+    .map(country => {
+      return `<option value="${country.code}">${country.name}</option>`;
     })
-    .join("");
-    dropdownList.innerHTML = markup;
-}
+    .join('');
+  dropdownList.innerHTML = markup;
+};
 
-const populateEventGallery = (events) => {
-    const markup = events.map(
-    event => `<div class="item-card">
+const populateEventGallery = events => {
+  const markup = events
+    .map(
+      event => `<div class="item-card">
         <a href="${event.images[0].url}" target="_blank">
-            <img src="${event.images[0].url}" alt="${event.name}" loading="lazy" width="300"/>
+            <div class="image-wrapper">
+                <img src="${event.images[0].url}" alt="${event.name}" loading="lazy" width="267"/>
+            </div>
         </a>
         <div class="item-info">
             <p class="item-title">
@@ -31,38 +36,58 @@ const populateEventGallery = (events) => {
                ${event.dates.start.localDate}
             </p>
             <p class="item-location">
-               ${event._embedded.venues[0].name}
+               <span> <img src="${pin}" />
+               ${event._embedded.venues[0].name}</span>
             </p>
         </div>
-    </div>`)
-    .join("");
+    </div>`
+    )
+    .join('');
   itemGallery.innerHTML = markup;
+  
+  
 };
 
+const processEventData = async () => {
+    const query = localStorage.getItem("query") || "";
+    const country = localStorage.getItem("country") || "";
+    const page = localStorage.getItem("page") || 1;
 
-populateCountriesDropdown();
-
-const processEventData = async (country = "") => {
-    const eventsObject = await fetchEvents("", country);
-    if (eventsObject && eventsObject._embedded && eventsObject._embedded.events.length > 0) { 
-        populateEventGallery(eventsObject._embedded.events);
-    } else {
-        itemGallery.innerHTML = "";
-        Notiflix.Notify.failure(
-            'Sorry, there are no results.'
-        )
-    }
-}
-
-processEventData();
+  const eventsObject = await fetchEvents(query, country, page);
+  
+  if (
+    eventsObject &&
+    eventsObject.data &&
+    eventsObject.data._embedded &&
+    eventsObject.data._embedded.events.length > 0
+  ) {
+    populateEventGallery(eventsObject.data._embedded.events);
+    generatePagination(page, eventsObject.totalCount);
+  } else {
+    itemGallery.innerHTML = '';
+    Notiflix.Notify.failure('Sorry, there are no results.');
+  }
+};
 
 const onCountryChange = async () => {
-    const selectedCountry = dropdownList.value;
-    // console.log(dropdownList.value);
-    await processEventData(selectedCountry);
+  const selectedCountry = dropdownList.value;
+  localStorage.setItem("country", selectedCountry);
+  localStorage.setItem("page", 1);
+  await processEventData();
+};
+
+const onPageChange = (e) => {
+    e.preventDefault();
+    const selectedValue = e.target.getAttribute("data-page");
+    if (isNaN(selectedValue)) {
+        return;
+    }
+    localStorage.setItem("page", selectedValue);
+    processEventData();
 }
 
-
-
 // form.addEventListener('search', onSearch);
-dropdownList.addEventListener("change", onCountryChange);
+pagesList.addEventListener('click', onPageChange)
+dropdownList.addEventListener('change', onCountryChange);
+
+export {populateCountriesDropdown, populateEventGallery, processEventData, onCountryChange};
