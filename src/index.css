@@ -1,0 +1,35 @@
+/* index.scss */
+
+
+/* Footer Styles */
+
+footer {
+    background-color: #000;
+    /* culoare de fundal */
+    color: #fff;
+    /* culoarea textului */
+    text-align: center;
+    /* alinierea textului */
+    padding: 20px 0;
+    /* spațierea interioară */
+    font-family: 'Montserrat', sans-serif;
+    /* fontul folosit */
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    /* dimensiunea textului */
+}
+
+footer p a {
+    color: #fff;
+    /* culoarea link-ului */
+    text-decoration: none;
+    /* fără subliniere */
+}
+
+footer p a:hover {
+    text-decoration: underline;
+    /* subliniere la hover */
+}
