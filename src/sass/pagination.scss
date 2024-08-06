@@ -1,29 +1,50 @@
+@keyframes slideIn {
+    from {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .pagination-container {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 60px 0;
-  background-color: var(--background-color);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 0;
+    background-color: var(--background-color);
 }
 
 ul {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
 }
 
 .pages li.active {
-  padding: 5px 12px;
-  border: 1px solid var(--main-text-color);
-  border-top-left-radius: 14px;
-  border-bottom-right-radius: 14px;
+    padding: 5px 12px;
+    border: 1px solid var(--main-text-color);
+    border-top-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    animation: highlight 0.5s ease-in-out;
+    background-color: var(--main-text-color);
+    color: var(--secondary-text-color);
+    border-radius: 14px;
 }
-
 
 .pages li {
     padding: 5px 12px;
     color: var(--secondary-text-color);
     cursor: pointer;
+    animation: bounce;
+    translate: 20px 4rem 150px;
+    display: inline-block;
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
