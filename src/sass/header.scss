@@ -5,6 +5,8 @@
   --third-text-color: #939393;
   --stroke-color: #212121;
   --background-color: #0e0e0e;
+  --modal-background: #FFF2FD;
+  --modal-main-color: #4C00FE;
 }
 
 * {
@@ -79,7 +81,7 @@
   padding-top: 40px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 800px) {
   .container {
     background-image: linear-gradient(
         rgba(11, 11, 11, 0.5),
@@ -119,7 +121,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .container {
     background-image: linear-gradient(
         rgba(11, 11, 11, 0.5),

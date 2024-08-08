@@ -1,5 +1,6 @@
 .pagination-container {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -12,6 +13,7 @@ ul {
   display: flex;
   flex-direction: row;
   list-style-type: none;
+  padding: 0;
 }
 
 .pages li.active {
@@ -19,6 +21,7 @@ ul {
   border: 1px solid var(--main-text-color);
   border-top-left-radius: 14px;
   border-bottom-right-radius: 14px;
+  color: var(--main-text-color);
 }
 
 

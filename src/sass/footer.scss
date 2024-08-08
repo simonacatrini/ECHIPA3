@@ -1,0 +1,18 @@
+.section-container {
+    display: flex;
+    background-color: var(--background-color);
+    color: var(--secondary-text-color);
+    padding-bottom: 57px;
+}
+
+.heart-icon {
+    color: #DF000F;
+}
+
+@media screen and (max-width: 480px) {
+    .footer-text {
+        text-align: center;
+        width: 252px;
+        font-size: 14px;
+    }
+}
