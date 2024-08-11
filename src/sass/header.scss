@@ -87,25 +87,32 @@
   padding-top: 40px;
 }
 
-//  h1 span{
+ 
+
+// //   display: flex;
+// //   align-items: center;
+// //   text-align: center;
+// //   text-transform: uppercase;
+// //   color: #dc56c5;
   
-//   font-size: 50px;
-//   font-weight: 900;
-//   max-width: 608px;
-//   text-shadow: 0 0 10px #03bcf4,
-//                0 0 20px #03bcf4,
-//                0 0 30px #03bcf4,
-//                0 0 40px #03bcf4;
-// animation: animate 3s alternate-reverse infinite;
+// //   font-size: 50px;
+// //   font-weight: 900;
+// //   max-width: 608px;
+// //   text-shadow: 0 0 10px #fff,
+// //                0 0 20px #fff,
+// //                0 0 30px #03bcf4,
+// //                0 0 40px #03bcf4;
+// // animation: animate 2s alternate-reverse infinite;
 
 // }
+
 @keyframes animate {
   0%{
     color:#fff;
   }
 
   50%{
-    color:#de82ce;
+    color:#dc56c5;
   }
 
   0%{

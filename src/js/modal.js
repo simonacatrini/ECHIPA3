@@ -1,6 +1,7 @@
 import { fetchEventDetails } from './discoveryapi';
 import ticket from '../images/ticket.svg';
 
+
 const contentWrapper = document.querySelector('.content-wrapper');
 
 const initModal = () => {
@@ -88,5 +89,63 @@ const populateEventDetails = detail => {
     </div>`;
   contentWrapper.innerHTML = markup;
 };
+let opts = {
+  lines: 13,
+  length: 28,
+  width: 14,
+  radius: 42,
+  scale: 1,
+  corners: 1,
+  color: '#dc56c5',
+  opacity: 0.25,
+  rotate: 0,
+  direction: 1,
+  speed: 1,
+  trail: 60,
+  fps: 20,
+  zIndex: 2e9,
+  className: 'spinner',
+  top: '50%',
+  left: '50%',
+  shadow: false,
+  hwaccel: false,
+  position: 'absolute',
+ }
+
+  // target = document.getElementById('spinner'),
+  // spinner = new Spinner(opts).spin(target);
+  
+
+  function showModalSpinner() {
+    var target = document.getElementById('spinner');
+    var spinner = new Spinner(opts).spin(target);
+
+    var modal = document.getElementById('loadingModal');
+    modal.style.display = 'flex';
+}
+
+// Function to hide the modal and stop the spinner
+function hideModalSpinner() {
+    var modal = document.getElementById('loadingModal');
+    modal.style.display = 'none';
+
+    // Stop the spinner
+    var target = document.getElementById('spinner');
+    while (target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+}
+
+// Example: Show the modal when the page loads and hide it after 3 seconds
+window.onload = function() {
+    showModalSpinner();
+
+    // Simulate loading process
+    setTimeout(hideModalSpinner, 3000); // Hide the spinner after 3 seconds
+};
+
+ 
+
+
 
 export { initModal, populateEventDetails };
