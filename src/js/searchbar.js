@@ -86,11 +86,21 @@ const onPageChange = e => {
 };
 
 const onSearch = (e) => {
-    const userInput = e.target.value;
+    const userInput = e ? e.target.value : localStorage.getItem('query') || '';
     localStorage.setItem('query', userInput);
     localStorage.setItem('page', 1);
     processEventData();
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('query')) {
+    onSearch();
+  }
+});
+
+form.addEventListener('change', onSearch);
+form.addEventListener("submit", (e) => e.preventDefault());
+
 
 form.addEventListener('change', onSearch);
 form.addEventListener("submit", (e) => e.preventDefault());

@@ -36,59 +36,57 @@ const populateEventDetails = detail => {
     detail.priceRanges && detail.priceRanges.length
       ? `${detail.priceRanges[0].type} ${detail.priceRanges[0].min}–${detail.priceRanges[0].max} ${detail.priceRanges[0].currency}`
       : 'Price not available';
+
+  const authorName = detail._embedded.attractions[0].name;
+
   const markup = `
-      <div class="circle-image">
-        <img src="${detail.images[2].url}" alt="${
-    detail.name
-  }" loading="lazy" width="132"/>
+    <div class="circle-image">
+      <img src="${detail.images[2].url}" alt="${detail.name}" loading="lazy" width="132"/>
+    </div>
+    <div class="two-column">
+      <div class="portfolio-image">
+        <img src="${detail.images[2].url}" alt="${detail.name}" loading="lazy" width="427"/>
       </div>
-      <div class="two-column">
-        <div class="portfolio-image">
-        <img src="${detail.images[2].url}" alt="${
-    detail.name
-  }" loading="lazy" width="427"/>
+      <div class="portfolio-text">
+        <div class="detail-holder">
+          <h4 class="subtitle">info</h4>
+          <p class="detail-text">${detail.info ? detail.info : 'No description found'} </p>
         </div>
-        <div class="portfolio-text">
-          <div class="detail-holder">
-            <h4 class="subtitle">info</h4>
-            <p class="detail-text">${
-              detail.info ? detail.info : 'No description found'
-            } </p>
-          </div>
-          <div class="detail-holder">
-            <h4 class="subtitle">when</h4>
-            <p class="detail-text">${detail.dates.start.localDate}
-              <br />${
-                detail.dates.start.localTime ? detail.dates.start.localTime : ''
-              } (${detail.dates.timezone ? detail.dates.timezone : ''})</span>
-            </p>
-            </div>
-          <div class="detail-holder">
-            <h4 class="subtitle">where</h4>
-            <p class="detail-text">${
-              detail.dates.timezone ? detail.dates.timezone : ''
-            }
-              <br />${detail._embedded.venues[0].name}
-            </p>
-          </div>
+        <div class="detail-holder">
+          <h4 class="subtitle">when</h4>
+          <p class="detail-text">${detail.dates.start.localDate}
+            <br />${detail.dates.start.localTime ? detail.dates.start.localTime : ''} (${detail.dates.timezone ? detail.dates.timezone : ''})</span>
+          </p>
+        </div>
+        <div class="detail-holder">
+          <h4 class="subtitle">where</h4>
+          <p class="detail-text">${detail.dates.timezone ? detail.dates.timezone : ''}<br />${detail._embedded.venues[0].name}</p>
         </div>
       </div>
-      <div class="bottom-part">
-        <h4 class="subtitle">who</h4>
-        <p class="detail-text">${detail._embedded.attractions[0].name}</p>
-        <h4 class="subtitle">prices</h4>
-        <p class="detail-text">
-            <span><img src="${ticket}"></span>${priceRange}</p>
-        <a href="${
-          detail.url
-        }" class="buy-tickets" target="_blank" rel="nofollow noopener noreferrer">buy tickets</a>
-      </div>
-      <div class="button-holder">
-        <button type="button" class="more-button">more from this author</button>
-      </div>
-    </div>`;
+    </div>
+    <div class="bottom-part">
+      <h4 class="subtitle">who</h4>
+      <p class="detail-text">${authorName}</p>
+      <h4 class="subtitle">prices</h4>
+      <p class="detail-text">
+        <span><img src="${ticket}"></span>${priceRange}</p>
+      <a href="${detail.url}" class="buy-tickets" target="_blank" rel="nofollow noopener noreferrer">buy tickets</a>
+    </div>
+    <div class="button-holder">
+      <button type="button" class="more-button" id="more-from-author">more from this author</button>
+    </div>
+  </div>`;
+
   contentWrapper.innerHTML = markup;
+
+  // Adăugare event listener pentru butonul "more from this author"
+  document.getElementById('more-from-author').addEventListener('click', () => {
+    localStorage.setItem('query', authorName);
+    localStorage.setItem('page', 1);
+    window.location.href = '/'; // Redirecționează către pagina principală
+  });
 };
+
 let opts = {
   lines: 13,
   length: 28,
