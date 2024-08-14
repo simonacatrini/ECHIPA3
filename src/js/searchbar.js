@@ -7,9 +7,17 @@ import Notiflix from 'notiflix';
 import pin from '../images/vector.svg';
 
 const form = document.querySelector('.search-form');
+const queryInput = document.getElementById('searchQuery');
 const itemGallery = document.querySelector('.item-gallery');
 const dropdownList = document.querySelector('.dropdown-list');
 const pagesList = document.querySelector('.pages');
+
+const loadExistingValues = () => {
+  const query = localStorage.getItem('query') || '';
+  const country = localStorage.getItem('country') || '';
+  queryInput.value = query;
+  dropdownList.value = country;
+};
 
 const populateCountriesDropdown = () => {
   const markup = countries
@@ -25,7 +33,9 @@ const populateEventGallery = events => {
     .map(
       event => `<div class="item-card" data-id="${event.id}">
             <div class="image-wrapper">
-                <img src="${event.images[0].url}" alt="${event.name}" loading="lazy" width="267"/>
+                <img src="${event.images[0].url}" alt="${
+        event.name
+      }" loading="lazy" width="267"/>
             </div>
         <div class="item-info">
             <p class="item-title">
@@ -36,8 +46,12 @@ const populateEventGallery = events => {
             </p>
             <p class="item-location">
                <span> 
-                 <img src="${pin}" />
-                ${event._embedded.venues[0].name ? event._embedded.venues[0].name : event.dates.timezone}
+                 <img src="${pin}" alt="pin icon" />
+                ${
+                  event._embedded.venues[0].name
+                    ? event._embedded.venues[0].name
+                    : event.dates.timezone
+                }
                </span>
             </p>
         </div>
@@ -85,31 +99,36 @@ const onPageChange = e => {
   processEventData();
 };
 
-const onSearch = (e) => {
-    const userInput = e ? e.target.value : localStorage.getItem('query') || '';
-    localStorage.setItem('query', userInput);
-    localStorage.setItem('page', 1);
-    processEventData();
-}
+const onSearch = e => {
+  const userInput = e.target.value;
+  localStorage.setItem('query', userInput);
+  localStorage.setItem('page', 1);
+  processEventData();
+};
 
-window.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('query')) {
-    onSearch();
-  }
-});
-
-form.addEventListener('change', onSearch);
-form.addEventListener("submit", (e) => e.preventDefault());
-
-
-form.addEventListener('change', onSearch);
-form.addEventListener("submit", (e) => e.preventDefault());
+queryInput.addEventListener('change', onSearch);
+form.addEventListener('submit', e => e.preventDefault());
 pagesList.addEventListener('click', onPageChange);
 dropdownList.addEventListener('change', onCountryChange);
+
+document.addEventListener('DOMContentLoaded', function() {
+  const revealTitle = document.querySelector('.page-title');
+  const checkPosition = () => {
+      const rect = revealTitle.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      if (rect.top < viewportHeight && rect.bottom > 0) {
+          revealTitle.style.opacity = 1;
+          revealTitle.style.transform = 'translateY(0)';
+      }
+  }
+  window.addEventListener('scroll', checkPosition);
+  checkPosition(); // Check position on page load
+});
 
 export {
   populateCountriesDropdown,
   populateEventGallery,
   processEventData,
   onCountryChange,
+  loadExistingValues,
 };
