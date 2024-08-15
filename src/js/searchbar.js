@@ -46,7 +46,7 @@ const populateEventGallery = events => {
             </p>
             <p class="item-location">
                <span> 
-                 <img src="${pin}" alt="pin icon" />
+                 <img src="${pin}" alt="pin-icon" />
                 ${
                   event._embedded.venues[0].name
                     ? event._embedded.venues[0].name

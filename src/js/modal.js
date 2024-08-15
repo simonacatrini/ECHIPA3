@@ -89,7 +89,7 @@ const populateEventDetails = detail => {
         <p class="detail-text">${detail._embedded.attractions[0].name}</p>
         <h4 class="subtitle">prices</h4>
         <p class="detail-text">
-            <span><img src="${ticket}"></span>${priceRange}</p>
+            <span><img src="${ticket}" alt="barcode"></span>${priceRange}</p>
         <a href="${
           detail.url
         }" class="buy-tickets" target="_blank" rel="nofollow noopener noreferrer">buy tickets</a>
