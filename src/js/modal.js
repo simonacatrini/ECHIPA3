@@ -28,8 +28,15 @@ const initModal = () => {
     }
   };
 
+  const handleClickOutside = e => {
+    if (e.target === refs.modal) {  
+      closeModal();
+    }
+  };
+
   refs.openModalBtn.addEventListener('click', openModal);
   refs.closeModalBtn.addEventListener('click', closeModal);
+  document.addEventListener('click', handleClickOutside);
 };
 
 const doMore = (e) => {
