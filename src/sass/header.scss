@@ -9,6 +9,10 @@
   --modal-main-color: #4C00FE;
 }
 
+html {
+  background-color: var(--background-color);
+}
+
 * {
   font-family: var(--font-family);
   font-weight: normal;
